@@ -6,8 +6,6 @@ class CreateUsers < ActiveRecord::Migration
       t.string :city
       t.string :state
       t.string :status
-      t.string :email
-      t.string :status
 
       t.timestamps null: false
     end

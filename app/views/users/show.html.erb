@@ -1,2 +1,11 @@
 <h1>User#show</h1>
 <p>Find me in app/views/user/show.html.erb</p>
+
+First Name: <%= @user.given_name %>
+Last Name: <%= @user.family_name %>
+Status: <%= @user.status %>
+
+<%= form_for @user, url: user_path(@user), method: :patch do |f| %>
+    <%= f.text_field :status %>
+    <%= f.submit %>
+<% end %>
