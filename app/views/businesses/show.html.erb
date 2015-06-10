@@ -1,2 +1,21 @@
 <h1>Business#show</h1>
 <p>Find me in app/views/business/show.html.erb</p>
+<p><%= @business.name %></p>
+<p><%= @business.address %></p>
+<p><%= @business.city %></p>
+<p><%= @business.state %></p>
+<p><%= @business.description %></p>
+<p><%= link_to 'Edit this business', edit_business_path %></p>
+<p>Total Reviews: <%= @reviews.count %></p>
+<%= link_to 'Add a review', new_business_review_path(@business) %>
+
+
+<!--TODO remove this ruby validation after removing records without userid-->
+<% @reviews.each do |r| %>
+    <% unless !r.user_id %>
+        <p><strong><%= r.title %></strong></p>
+        <p><%= r.description %></p>
+        <p>Rating: <%= r.rating %></p>
+        <p>Reviewed by: <% u = User.find(r.user_id) %><%= link_to u.given_name, user_path(u) %>, <%= time_ago_in_words(r.created_at) %> ago.</p>
+    <% end %>
+<% end %>

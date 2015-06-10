@@ -1,10 +1,14 @@
 class BusinessesController < ApplicationController
+  before_action :authenticate_user!, except: [:show, :index]
+
+
   def index
-    # @businesses = Business.all
+    @businesses = Business.all
   end
 
   def show
     @business = Business.find(params[:id])
+    @reviews = @business.reviews.all
   end
 
   def create
@@ -23,7 +27,7 @@ class BusinessesController < ApplicationController
 
   def update
     @business = Business.find(params[:id])
-    if @business.update_attributes(user_params)
+    if @business.update_attributes(business_params)
       redirect_to @business
     else
       render 'edit'
@@ -31,6 +35,9 @@ class BusinessesController < ApplicationController
   end
 
   def destroy
+    @business = Business.find(params[:id])
+    @business.destroy
+    redirect_to businesses_path
   end
 
   private

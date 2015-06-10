@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users
-  resources :businesses
+  resources :users do
+    resources :reviews
+  end
+  resources :businesses do
+    resources :reviews
+  end
+
+  authenticate :user do
+    root 'profile#show', as: 'authenticated_root'
+  end
+
   root 'welcome#index'
 
 
