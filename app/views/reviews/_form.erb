@@ -1,4 +1,8 @@
-
+<% if @review.errors.full_messages.any? %>
+    <% @review.errors.full_messages.each do |error_message| %>
+        <%= error_message if @review.errors.full_messages.first == error_message %> <br />
+    <% end %>
+<% end %>
 
 <%= form_for [@business, @review] do |f| %>
     <p>
@@ -13,7 +17,6 @@
       <%= f.label :rating %>
       <%= f.number_field :rating, in: 1..5 %>
     </p>
-
 
     <%= f.submit 'Submit' %>
 

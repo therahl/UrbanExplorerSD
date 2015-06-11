@@ -1,3 +1,9 @@
+<% if @business.errors.full_messages.any? %>
+    <% @business.errors.full_messages.each do |error_message| %>
+        <%= error_message if @business.errors.full_messages.first == error_message %> <br />
+    <% end %>
+<% end %>
+
 <%= form_for @business do |f| %>
 
     <%= f.label :name %>
