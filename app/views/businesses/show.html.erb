@@ -16,6 +16,6 @@
         <p><strong><%= r.title %></strong></p>
         <p><%= r.description %></p>
         <p>Rating: <%= r.rating %></p>
-        <p>Reviewed by: <% u = User.find(r.user_id) %><%= link_to u.given_name, user_path(u) %>, <%= time_ago_in_words(r.created_at) %> ago.</p>
+        <p>Reviewed by: <% u = User.find(r.user_id) %> <%= image_tag u.avatar.url(:thumb), style: "height: 100px;" %><%= link_to u.given_name, user_path(u) %>, <%= time_ago_in_words(r.created_at) %> ago.</p>
     <% end %>
 <% end %>

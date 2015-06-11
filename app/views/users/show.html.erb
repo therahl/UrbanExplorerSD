@@ -1,14 +1,15 @@
 <h1>User#show</h1>
 <p>Find me in app/views/user/show.html.erb</p>
-
+<%= image_tag @user.avatar.url(:medium) %>
 <p>First Name: <%= @user.given_name %></p>
 <p>Last Name: <%= @user.family_name %></p>
 <p>Email: <%= @user.email %></p>
 <p>City: <%= @user.city %></p>
 <p>State: <%= @user.state %></p>
 <p>Status: <%= @user.status %></p>
-<p><%= link_to 'Edit Profile', edit_user_path %></p>
-
+<p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
+<p>Total Reviews: <%= @reviews.count %></p>
+<p>List of Likes: <%= @user.followees(Business) %></p>
 <p>New Status:</p>
 <%= form_for @user, url: user_path(@user), method: :patch do |f| %>
     <%= f.text_field :status %>

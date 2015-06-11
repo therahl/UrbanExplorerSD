@@ -1,14 +1,23 @@
 Rails.application.routes.draw do
   devise_for :users
+
   resources :users do
     resources :reviews
+    # post 'follow',   to: 'socializations#follow'
+    # post 'unfollow', to: 'socializations#unfollow'
   end
+
+# resources :categories, only: [:index] do
+#   post 'follow',   to: 'socializations#follow'
+#   post 'unfollow', to: 'socializations#unfollow'
+# end
+
   resources :businesses do
     resources :reviews
   end
 
   authenticate :user do
-    root 'profile#show', as: 'authenticated_root'
+    root 'users#show', as: 'authenticated_root'
   end
 
   root 'welcome#index'
