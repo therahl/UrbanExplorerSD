@@ -24,7 +24,7 @@ class ReviewsController < ApplicationController
 
   def update
     @business = Business.find(params[:business_id])
-    @reviews = @business.reviews.find(params[id])
+    @review = @business.reviews.find(params[id])
     if @review.save
       redirect_to @business
     else
@@ -33,6 +33,10 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @business = Business.find(params[:business_id])
+    @review = @business.reviews.find(params[:id])
+    @review.destroy
+    redirect_to @business
   end
 
   def show

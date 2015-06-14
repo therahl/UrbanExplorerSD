@@ -1,0 +1,2 @@
+$('.likes-count').text("<%= j pluralize(@business.likers(User).count, 'Likes') %>");
+$('.social').html('<%= j button_to "Unlike", business_like_path(@business), remote: :true, method: :post, class: "social-unlike" %>');

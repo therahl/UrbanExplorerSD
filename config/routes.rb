@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
   resources :businesses do
     resources :reviews
+    post 'like',   to: 'socializations#like'
+    post 'unlike', to: 'socializations#unlike'
   end
 
   authenticate :user do

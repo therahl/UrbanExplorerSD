@@ -3,5 +3,4 @@ class Business < ActiveRecord::Base
   validates :name, uniqueness: true
   acts_as_followable
   acts_as_likeable
-  
 end

@@ -9,6 +9,13 @@ class BusinessesController < ApplicationController
   def show
     @business = Business.find(params[:id])
     @reviews = @business.reviews.all
+
+    respond_to do |format|
+      format.html
+      # format.json { render json: @business }
+      format.js
+    end
+
   end
 
   def create
