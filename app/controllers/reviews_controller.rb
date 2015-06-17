@@ -2,8 +2,8 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
 
   def edit
-    @business = Business.find([:business_id])
-    @reviews = @business.reviews.find(params[:id])
+    @business = Business.find(params[:business_id])
+    @review = @business.reviews.find(params[:id])
   end
 
   def create
@@ -24,8 +24,8 @@ class ReviewsController < ApplicationController
 
   def update
     @business = Business.find(params[:business_id])
-    @review = @business.reviews.find(params[id])
-    if @review.save
+    @review = @business.reviews.find(params[:id])
+    if @review.update_attributes(params.require(:review).permit(:title, :description, :rating))
       redirect_to @business
     else
       render 'new'
