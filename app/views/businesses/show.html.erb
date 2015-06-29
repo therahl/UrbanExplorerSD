@@ -21,23 +21,47 @@
   <%= pluralize(@business.likers(User).count, 'Like') %>
 </p>
 
-<% @reviews.each do |r| %>
 
-        <p><strong><%= r.title %></strong></p>
-        <p><%= r.description %></p>
-        <p>Rating: <%= r.rating %></p>
-        <p>
-          Reviewed by:
-            <% u = User.find(r.user_id) %>
-            <%= image_tag u.avatar.url(:thumb) %>
-            <%= link_to u.given_name, user_path(u.id) %>,
-            <%= time_ago_in_words(r.created_at) %> ago.
-            <% if @user_status %>
-              <% if current_user.id == u.id %>
-                <%= link_to '[edit]', edit_business_review_path(@business.id, r.id) %>
-                <%= link_to '[X]', business_review_path(@business.id, r.id), method: :delete %>
+
+        <div class="row">
+          <div class="col-md-8">
+            <h2 class="page-header">Comments</h2>
+            <section class="comment-list">
+
+              <% @reviews.each do |r| %>
+                  <% u = User.find(r.user_id) %>
+
+              <!-- First Comment -->
+              <article class="row">
+                <div class="col-md-2 col-sm-2 hidden-xs">
+                  <figure class="thumbnail">
+                    <%= image_tag u.avatar.url(:thumb), class: "img-responsive" %>
+                    <figcaption class="text-center"><%= link_to u.given_name, user_path(u.id) %></figcaption>
+                  </figure>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                  <div class="panel panel-default arrow left">
+                    <div class="panel-body">
+                      <header class="text-left">
+                        <div class="comment-user"><i class="fa fa-user"></i> <%= r.title %></div>
+                        <time class="comment-date" datetime="<%= r.created_at %>"><i class="fa fa-clock-o"></i> Commented <%= time_ago_in_words(r.created_at) %> ago.</time>
+                      </header>
+                      <div class="comment-post">
+                        <p>
+                         <%= r.description %>
+                        </p>
+                      </div>
+                      <% if @user_status %>
+                          <% if current_user.id == u.id %>
+                              <p class="text-right"><i class="fa fa-reply"></i><%= link_to 'Edit', edit_business_review_path(@business.id, r.id),class: "btn btn-default btn-sm" %>
+                              <%= link_to '[X]', business_review_path(@business.id, r.id), method: :delete %></p>
+                          <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </article>
               <% end %>
-            <% end %>
-        </p><hr></hr>
-
-<% end %>
+            </section>
+          </div>
+        </div>

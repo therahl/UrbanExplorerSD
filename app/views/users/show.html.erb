@@ -1,15 +1,21 @@
-<h1>User#show</h1>
-<p>Find me in app/views/user/show.html.erb</p>
-<%= image_tag @user.avatar.url(:medium) %>
-<p>First Name: <%= @user.given_name %></p>
-<p>Last Name: <%= @user.family_name %></p>
-<p>Email: <%= @user.email %></p>
-<p>City: <%= @user.city %></p>
-<p>State: <%= @user.state %></p>
-<p>Status: <%= @user.status %></p>
-<p>Total Reviews: <%= @reviews.count %></p>
-<p>List of Likes: <%= @user.followees(Business) %></p>
-<% if @user.id == current_user.id %>
+<h1>Profile</h1>
+
+<div class="row">
+  <div class="col-sm-2 col-md-2">
+    <%= image_tag @user.avatar.url(:medium), class: "img-responsive" %>
+  </div>
+  <div class="col-sm-4 col-md-4">
+    <blockquote>
+      <p><%= @user.given_name %> <%= @user.family_name %></p> <small><cite title="Source Title"><%= @user.city %>, <%= @user.state %>  <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+    </blockquote>
+    <p> <i class="glyphicon glyphicon-envelope"></i> <%= @user.email %>
+      <br
+      /> <i class="glyphicon glyphicon-globe"></i>
+      <br /> <i class="glyphicon glyphicon-gift"></i> <%= @user.created_at %></p>
+  </div>
+</div>
+
+<% if @user_status && @user.id == current_user.id %>
 <p>New Status:</p>
   <%= form_for @user, url: user_path(@user), method: :patch do |f| %>
       <%= f.text_field :status %>
@@ -18,11 +24,44 @@
     <p><%= link_to 'Edit Profile', edit_user_path(@user) %></p>
 <% end %>
 
-<h3>Reviews:</h3>
-    <% @reviews.each do |r| %>
-    <% b = Business.find(r.business_id) %>
-    <p><%= link_to b.name, business_path(b) %></p>
-    <p><%= r.title %></p>
-    <p><%= r.description %></p>
-    <p>Created <%=  time_ago_in_words(r.created_at) %> ago.</p>
-<% end %>
+
+<div class="row">
+  <div class="col-md-8">
+    <h2 class="page-header">Recent Reviews:</h2>
+    <section class="comment-list">
+
+      <% @reviews.each do |r| %>
+          <% b = Business.find(r.business_id) %>
+          <!-- First Comment -->
+          <article class="row">
+            <div class="col-md-2 col-sm-2 hidden-xs">
+              <figure class="thumbnail">
+                <%= image_tag @user.avatar.url(:thumb), class: "img-responsive" %>
+                    <figcaption class="text-center"><%= link_to b.name, business_path(b.id) %></figcaption>
+                    </figure>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                      <div class="panel panel-default arrow left">
+                        <div class="panel-body">
+                          <header class="text-left">
+                            <div class="comment-user"><i class="fa fa-user"></i> <%= r.title %></div>
+                            <time class="comment-date" datetime="<%= r.created_at %>"><i class="fa fa-clock-o"></i> Commented <%= time_ago_in_words(r.created_at) %> ago.</time>
+                          </header>
+                          <div class="comment-post">
+                            <p>
+                              <%= r.description %>
+                            </p>
+                          </div>
+                          <% if @user_status %>
+                              <% if current_user.id == u.id %>
+                                  <p class="text-right"><i class="fa fa-reply"></i><%= link_to 'Edit', edit_business_review_path(@business.id, r.id),class: "btn btn-default btn-sm" %>
+                                        <%= link_to '[X]', business_review_path(@business.id, r.id), method: :delete %></p>
+                                    <% end %>
+                              <% end %>
+                              </div>
+                              </div>
+                              </div>
+                              </article>
+                          <% end %>
+                          </section>
+                          </div>

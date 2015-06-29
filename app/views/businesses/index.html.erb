@@ -1,6 +1,31 @@
-<h1>Business#index</h1>
-<p>Find me in app/views/business/index.html.erb</p>
-<% @businesses.each do |b| %>
-    <h3><%= link_to b.name, business_path(b) %> <%= link_to '[X]', business_path(b), method: :delete %></h3>
-    <p><%= b.description %></p>
-<% end %>
+
+<div class="jumbotron text-center">
+  <h1>Fixed Width Layout</h1>
+  <p class="lead">The Bootstrap 3 grid is fluid only. This example shows how to use a custom container to create a fixed width layout.</p>
+  <p><a class="btn btn-large btn-success" href="http://bootply.com/tagged/bootstrap-3" target="ext">More Examples</a></p>
+</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <% @businesses.limit(10).each do |b| %>
+        <h4><%= link_to b.name, business_path(b) %></h4>
+        <p><%= b.description %></p>
+    <% end %>
+
+  </div>
+
+  <div class="col-lg-6">
+    <% @businesses.limit(5).each do |b| %>
+        <h4><%= link_to b.name, business_path(b) %></h4>
+        <p><%= b.description %></p>
+    <% end %>
+
+  </div>
+</div>
+<hr>
+
+<div class="jumbotron text-center">
+  <h2>Moving from Bootstrap 2.x to 3.0?</h2>
+  <p class="lead">Everything has changed, so you can't just replace the 2.x with the 3.0 files. The folks at Bootply, the Bootstrap Playground have created a migration guide to help.</p>
+  <p><a class="btn btn-large btn-success" href="http://www.bootply.com/bootstrap-3-migration-guide" target="ext">Migration Guide</a></p>
+</div>
