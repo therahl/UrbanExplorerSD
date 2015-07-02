@@ -22,7 +22,7 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
-  config.omniauth :twitter, "APP_ID", "APP_SECRET"
+  config.omniauth :twitter, "WtdPBMc5WbUciKZiB4XRB6ecs", "4YPz2mkyL4Ntgs76CNPnhaThWgh8jR6uePCDhqAIoQBuVsEhsQ"
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
   # just :email. You can configure it to use [:username, :subdomain], so for

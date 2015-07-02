@@ -27,8 +27,12 @@ gem "socialization"
 gem 'devise'
 gem 'omniauth-twitter'
 gem 'paperclip'
+gem 'gmaps4rails'
+gem 'underscore-rails'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'pry'
 end
