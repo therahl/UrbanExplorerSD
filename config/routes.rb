@@ -23,10 +23,10 @@ Rails.application.routes.draw do
   end
 
   authenticate :user do
-    root 'users#show', as: 'authenticated_root'
+    root 'businesses#index', as: 'authenticated_root'
   end
 
-  root 'welcome#index'
+  root 'businesses#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
