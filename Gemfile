@@ -29,10 +29,12 @@ gem 'omniauth-twitter'
 gem 'paperclip'
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem 'geocoder'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'pry'
+  gem 'rspec-rails'
 end
