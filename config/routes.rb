@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     post 'unlike', to: 'socializations#unlike'
   end
 
-  authenticate :user do
+  authenticated :user do
     root 'businesses#index', as: 'authenticated_root'
   end
 

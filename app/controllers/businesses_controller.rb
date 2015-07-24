@@ -4,6 +4,11 @@ class BusinessesController < ApplicationController
 
   def index
     @businesses = Business.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @businesses }
+    end
+
   end
 
   def show
